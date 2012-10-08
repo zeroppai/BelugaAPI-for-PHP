@@ -5,9 +5,9 @@ BelugaAPI for PHP
 ####インストール方法
 ドキュメントルート(~htdocs)直下に設置する
 
-* ~htdocs/index.php
-* ~htdocs/module/beluga.php
-* ~htdocs/module/functions.php
+* ~htdocs/beluga/index.php
+* ~htdocs/beluga/module/beluga.php
+* ~htdocs/beluga/module/functions.php
 
 ####サンプルコード
 * *statuses/home* **ホーム取得**
