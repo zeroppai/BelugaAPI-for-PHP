@@ -52,10 +52,7 @@ function defaultAction(){
 
 function homeAction(){
 	foreach (beluga()->home() as $val) {
-		echo '<div><img align="left" src="'.$val['user']['profile_image_sizes']['x50'].'"/>';
-		echo '#'.$val['user']['name'].' ['.$val['room']['name'].'] '.$val['room']['hash'].'<br>';
-		echo str_replace(chr(10),'<br>',$val['text']).'</div>';
-		echo '<br>';
+		timeline($val);
 	}
 }
 
@@ -67,7 +64,7 @@ function updateAction(){
 
 	echo 'ルーム:<input id="room" value="'.$_GET['room'].'"/>   ';
 	echo 'メッセージ:<input id="msg"/>';
-	echo '<input type="button" value="投稿" onclick="location.href=\'./?action=update&text=\'+msg.value+\'&room=\'+room.value+\'&'.g('user_id.user_token').'\';"/><br>'.chr(10);
+	echo '<input type="button" value="投稿" onclick="location.href=\'./?action=update&text=\'+encodeURIComponent(msg.value)+\'&room=\'+encodeURIComponent(room.value)+\'&'.g('user_id.user_token').'\';"/><br>'.chr(10);
 	echo '<hr>';
 	homeAction();
 }
@@ -78,6 +75,34 @@ function mentionsAction(){
 		echo '#'.$val['user']['name'].' ['.$val['room']['name'].'] '.$val['room']['hash'].'<br>';
 		echo str_replace(chr(10),'<br>',$val['text']).'</div>';
 		echo '<br>';
+	}
+}
+
+function followingAction(){
+	foreach (beluga()->following() as $val) {
+		table($val);
+	}
+}
+
+function roomAction(){
+?>
+<script>
+	function roomHash(elm2) {
+		var elm = document.getElementById(elm2);
+		return encodeURIComponent(elm.options[elm.selectedIndex].value);
+	};
+</script>
+<?php
+	echo '<select id="list">';
+	foreach (beluga()->following() as $val) {
+		echo '  <option value="'.$val['hash'].'">'.$val['name'].'</option>';
+	}
+	echo '</select>';
+	echo '<input type="button" value="確認" onclick="location.href=\'./?action=room&room=\'+roomHash(\'list\')+\'&'.g('user_id.user_token').'\';"/>';
+	echo '<hr>';
+	if(!isset($_GET['room'])) $_GET['room']='29Kw_gYAk2RIY';
+	foreach (beluga()->room($_GET['room']) as $val) {
+		timeline($val);
 	}
 }
 

@@ -30,3 +30,10 @@ function g($params){
 	}
 	return implode('&', $res);
 }
+
+function timeline($val){
+	echo '<div><img align="left" src="'.$val['user']['profile_image_sizes']['x50'].'"/>';
+	echo '#'.$val['user']['name'].' ['.$val['room']['name'].'] '.$val['room']['hash'].'<br>';
+	echo str_replace(chr(10),'<br>',$val['text']).'</div>';
+	echo '<br>';
+}
