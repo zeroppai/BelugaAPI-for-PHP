@@ -53,7 +53,7 @@ function defaultAction(){
 function homeAction(){
 	foreach (beluga()->home() as $val) {
 		echo '<div><img align="left" src="'.$val['user']['profile_image_sizes']['x50'].'"/>';
-		echo '#'.$val['user']['name'].' ['.$val['room']['name'].']<br>';
+		echo '#'.$val['user']['name'].' ['.$val['room']['name'].'] '.$val['room']['hash'].'<br>';
 		echo str_replace(chr(10),'<br>',$val['text']).'</div>';
 		echo '<br>';
 	}
