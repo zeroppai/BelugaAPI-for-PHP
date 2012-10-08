@@ -25,6 +25,13 @@ class Beluga {
 		return json_decode(@file_get_contents($url),true);
 	}
 
+	function update($text,$room_hash){
+		$url = 'http://api.beluga.fm/1/statuses/update?app_id='.$this->app_id
+				.'&app_secret='.$this->app_secret.'&user_id='.$this->user_id.'&user_token='.$this->user_token
+				.'&text='.urlencode($text).'&room_hash='.urlencode($room_hash);
+		return json_decode(@file_get_contents($url),true);
+	}
+
 	function room($room_hash,$since_id='0'){
 		$url = 'http://api.beluga.fm/1/statuses/room?app_id='.$this->app_id
 				.'&app_secret='.$this->app_secret.'&user_id='.$this->user_id.'&user_token='.$this->user_token

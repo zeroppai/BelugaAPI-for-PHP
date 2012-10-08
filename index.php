@@ -52,10 +52,24 @@ function defaultAction(){
 
 function homeAction(){
 	foreach (beluga()->home() as $val) {
+		echo '<div><img align="left" src="'.$val['user']['profile_image_sizes']['x50'].'"/>';
 		echo '#'.$val['user']['name'].' ['.$val['room']['name'].']<br>';
-		echo str_replace(chr(10),'<br>',$val['text']).'<br>';
+		echo str_replace(chr(10),'<br>',$val['text']).'</div>';
 		echo '<br>';
 	}
+}
+
+function updateAction(){
+	if(!isset($_GET['room'])) $_GET['room']='29Kw_gYAk2RIY';
+	if(isset($_GET['text'])){
+		beluga()->update($_GET['text'],$_GET['room']);
+	}
+
+	echo 'ルーム:<input id="room" value="'.$_GET['room'].'"/>   ';
+	echo 'メッセージ:<input id="msg"/>';
+	echo '<input type="button" value="投稿" onclick="location.href=\'./?action=update&text=\'+msg.value+\'&room=\'+room.value+\'&'.g('user_id.user_token').'\';"/><br>'.chr(10);
+	echo '<hr>';
+	homeAction();
 }
 
 ?>
