@@ -17,4 +17,8 @@ BelugaAPI for PHP
 * *statuses/update* **投稿**
 * *statuses/mentions* **返信取得**
 * *statuses/room* **ルーム投稿取得**
-* *account/following* **フォローしてるルーム取得**
+* *account/following* **フォローしてるルーム取得*
+
+
+###サンプルページ
+ http://www50.atpages.jp/~zeroppai/beluga_api/
